@@ -1,0 +1,131 @@
+PROGRAM = ../ofd_mpi
+
+OMPOPT  = -fopenmp
+MPIOPT  = -D_MPI
+
+OBJS    =        \
+Main.o           \
+setupSize.o      \
+setupSizeNear.o  \
+memallocfree3.o  \
+solve.o          \
+comm.o           \
+../src/updateEx.o        \
+../src/updateEy.o        \
+../src/updateEz.o        \
+../src/updateHx.o        \
+../src/updateHy.o        \
+../src/updateHz.o        \
+../src/dispersionEx.o    \
+../src/dispersionEy.o    \
+../src/dispersionEz.o    \
+../src/calcFar1d.o       \
+../src/calcFar2d.o       \
+../src/input.o           \
+../src/input2.o          \
+../src/monitor.o         \
+../src/memallocfree1.o   \
+../src/memallocfree2.o   \
+../src/setup.o           \
+../src/setup_vector.o    \
+../src/setupId.o         \
+../src/setupDispersion.o \
+../src/setupNear.o       \
+../src/setupMurHx.o      \
+../src/setupMurHy.o      \
+../src/setupMurHz.o      \
+../src/setupPmlEx.o      \
+../src/setupPmlEy.o      \
+../src/setupPmlEz.o      \
+../src/setupPmlHx.o      \
+../src/setupPmlHy.o      \
+../src/setupPmlHz.o      \
+../src/setupPml.o        \
+../src/initfield.o       \
+../src/vfeed.o           \
+../src/efeed.o           \
+../src/eload.o           \
+../src/vpoint.o          \
+../src/average.o         \
+../src/murHx.o           \
+../src/murHy.o           \
+../src/murHz.o           \
+../src/pmlEx.o           \
+../src/pmlEy.o           \
+../src/pmlEz.o           \
+../src/pmlHx.o           \
+../src/pmlHy.o           \
+../src/pmlHz.o           \
+../src/pbcx.o            \
+../src/pbcy.o            \
+../src/pbcz.o            \
+../src/dftNear1d.o       \
+../src/dftNear1dX.o      \
+../src/dftNear1dY.o      \
+../src/dftNear1dZ.o      \
+../src/dftNear2d.o       \
+../src/dftNear2dX.o      \
+../src/dftNear2dY.o      \
+../src/dftNear2dZ.o      \
+../src/dftNear3d.o       \
+../src/calcNear3d.o      \
+../src/nearfield_c.o     \
+../src/zfeed.o           \
+../src/spara.o           \
+../src/coupling.o        \
+../src/outputCross.o     \
+../src/plot3dGeom.o      \
+../src/ingeometry.o      \
+../src/geomlines.o       \
+../src/writeout.o        \
+../src/readout.o         \
+../src/post.o            \
+../src/farfield.o        \
+../src/planewave.o       \
+../src/outputFar0d.o     \
+../src/outputFar1d.o     \
+../src/outputFar2d.o     \
+../src/outputNear1d.o    \
+../src/outputNear2d.o    \
+../src/calcNear1d.o      \
+../src/calcNear2d.o      \
+../src/plot2dIter.o      \
+../src/plot2dFeed.o      \
+../src/plot2dPoint.o     \
+../src/plot2dFreq.o      \
+../src/plot2dFreq0.o     \
+../src/plot2dFar0d0.o    \
+../src/plot2dFar1d0.o    \
+../src/plot3dFar2d.o     \
+../src/plot3dFar2d0.o    \
+../src/plot2dNear1d0.o   \
+../src/plot2dNear2d0.o   \
+../src/plot3dNear2d0.o   \
+../src/utils.o           \
+../src/ev2dlib.o         \
+../src/ev2d.o            \
+../src/ev3d.o
+
+CC      = mpicc
+CFLAGS  = -O2 -I../include -Wall
+#CFLAGS  += -std=c99
+#CFLAGS  += -D_VECTOR
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -O2 $(OMPOPT)
+LIBS    = -lm
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+Main.o: Main.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+comm.o: comm.c
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

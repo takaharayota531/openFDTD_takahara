@@ -1,0 +1,102 @@
+## gcc_mpi
+PROGRAM = arf_gcc_mpi
+OMPOPT  = -fopenmp
+MPIOPT  = -D_MPI
+CC      = mpicc
+CFLAGS  = -O3 -I../include -Wall
+CFLAGS  += -std=c99
+LDFLAGS = -O3 $(OMPOPT)
+LIBS    = -lm
+
+## gcc
+#PROGRAM = arf_gcc
+#OMPOPT  = -fopenmp
+#MPIOPT  =
+#CC      = gcc
+#CFLAGS  = -O3 -I../include -Wall
+#CFLAGS  += -std=c99
+#LDFLAGS = -O3 $(OMPOPT)
+#LIBS    = -lm
+
+OBJS    =        \
+Main.o           \
+../../OpenMOM/arm/initsegment.o \
+setgeometry.o    \
+getvalue.o       \
+outputofd.o      \
+../../OpenMOM/arm/comm.o        \
+../../OpenMOM/arm/urand.o       \
+../src/input2.o         \
+../src/monitor.o        \
+../src/memallocfree1.o  \
+../src/memallocfree2.o  \
+../src/memallocfree3.o  \
+../src/setup.o          \
+../src/setupSize.o      \
+../src/setupSizeNear.o  \
+../src/setupId.o        \
+../src/setupMurHx.o     \
+../src/setupMurHy.o     \
+../src/setupMurHz.o     \
+../src/setupPmlEx.o     \
+../src/setupPmlEy.o     \
+../src/setupPmlEz.o     \
+../src/setupPmlHx.o     \
+../src/setupPmlHy.o     \
+../src/setupPmlHz.o     \
+../src/setupPml.o       \
+../src/setupNear.o      \
+../src/solve.o          \
+../src/initfield.o      \
+../src/updateEx.o       \
+../src/updateEy.o       \
+../src/updateEz.o       \
+../src/updateHx.o       \
+../src/updateHy.o       \
+../src/updateHz.o       \
+../src/vfeed.o          \
+../src/efeed.o          \
+../src/eload.o          \
+../src/vpoint.o         \
+../src/murHx.o          \
+../src/murHy.o          \
+../src/murHz.o          \
+../src/pmlEx.o          \
+../src/pmlEy.o          \
+../src/pmlEz.o          \
+../src/pmlHx.o          \
+../src/pmlHy.o          \
+../src/pmlHz.o          \
+../src/dftNear1d.o      \
+../src/dftNear1dX.o     \
+../src/dftNear1dY.o     \
+../src/dftNear1dZ.o     \
+../src/dftNear2d.o      \
+../src/dftNear2dX.o     \
+../src/dftNear2dY.o     \
+../src/dftNear2dZ.o     \
+../src/dftNear3d.o      \
+../src/calcNear2d.o     \
+../src/calcNear3d.o     \
+../src/nearfield_c.o    \
+../src/average.o        \
+../src/zfeed.o          \
+../src/spara.o          \
+../src/coupling.o       \
+../src/ingeometry.o     \
+../src/farfield.o       \
+../src/planewave.o      \
+../src/utils.o
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+Main.o: Main.c
+	$(CC) -c $(CFLAGS) $(OMPOPT) $?
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

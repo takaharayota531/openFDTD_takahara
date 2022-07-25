@@ -1,0 +1,22 @@
+OpenFDTD 2 7
+title = PBC test
+xmesh = -0.15 30 0.15
+ymesh = -0.15 30 0.15
+zmesh = -0.15 30 0.15
+geometry = 1 1 -0.05 0.05 -0.05 0.05 -0.05 0.05
+planewave = 0 0 1
+pbc = 1 1 0
+frequency1 = 3e9 3e9 0
+frequency2 = 3e9 3e9 0
+solver = 10000 50 1e-3
+plotiter = 1
+plotnear2d = E X 0
+plotnear2d = E Y 0
+near2ddim = 1 1
+near2ddb = 0
+near2dcontour = 0
+near2dobj = 1
+near2dnoinc = 0
+window2d = 450 300 10 0
+window3d = 600 600 12 60 30
+end

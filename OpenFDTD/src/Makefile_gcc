@@ -1,0 +1,134 @@
+PROGRAM = ../ofd
+
+OMPOPT = -fopenmp
+
+OBJS    =         \
+Main.o            \
+input.o           \
+input2.o          \
+monitor.o         \
+memallocfree1.o   \
+memallocfree2.o   \
+memallocfree3.o   \
+setup.o           \
+setup_vector.o    \
+setupSize.o       \
+setupSizeNear.o   \
+setupId.o         \
+setupDispersion.o \
+setupNear.o       \
+setupMurHx.o      \
+setupMurHy.o      \
+setupMurHz.o      \
+setupPmlEx.o      \
+setupPmlEy.o      \
+setupPmlEz.o      \
+setupPmlHx.o      \
+setupPmlHy.o      \
+setupPmlHz.o      \
+setupPml.o        \
+solve.o           \
+initfield.o       \
+updateEx.o        \
+updateEy.o        \
+updateEz.o        \
+updateHx.o        \
+updateHy.o        \
+updateHz.o        \
+dispersionEx.o    \
+dispersionEy.o    \
+dispersionEz.o    \
+vfeed.o           \
+efeed.o           \
+eload.o           \
+vpoint.o          \
+murHx.o           \
+murHy.o           \
+murHz.o           \
+pmlEx.o           \
+pmlEy.o           \
+pmlEz.o           \
+pmlHx.o           \
+pmlHy.o           \
+pmlHz.o           \
+pbcx.o            \
+pbcy.o            \
+pbcz.o            \
+dftNear1d.o       \
+dftNear1dX.o      \
+dftNear1dY.o      \
+dftNear1dZ.o      \
+dftNear2d.o       \
+dftNear2dX.o      \
+dftNear2dY.o      \
+dftNear2dZ.o      \
+dftNear3d.o       \
+calcNear3d.o      \
+nearfield_c.o     \
+average.o         \
+zfeed.o           \
+spara.o           \
+coupling.o        \
+outputCross.o     \
+plot3dGeom.o      \
+ingeometry.o      \
+geomlines.o       \
+writeout.o        \
+readout.o         \
+post.o            \
+farfield.o        \
+planewave.o       \
+outputFar0d.o     \
+outputFar1d.o     \
+outputFar2d.o     \
+outputNear1d.o    \
+outputNear2d.o    \
+calcFar1d.o       \
+calcFar2d.o       \
+calcNear1d.o      \
+calcNear2d.o      \
+plot2dIter.o      \
+plot2dFeed.o      \
+plot2dPoint.o     \
+plot2dFreq.o      \
+plot2dFreq0.o     \
+plot2dFar0d0.o    \
+plot2dFar1d0.o    \
+plot3dFar2d.o     \
+plot3dFar2d0.o    \
+plot2dNear1d0.o   \
+plot2dNear2d0.o   \
+plot3dNear2d0.o   \
+utils.o           \
+cputime.o         \
+ev2dlib.o         \
+ev2d.o            \
+ev3d.o
+
+CC      = gcc
+CFLAGS  = -Ofast -I../include -Wall $(OMPOPT)
+#CFLAGS  += -std=c99
+#CFLAGS  += -D_VECTOR
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -Ofast $(OMPOPT)
+LIBS    = -lm
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) $(LDFLAGS) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+plot2dNear1d0.o: plot2dNear1d0.c
+	$(CC) -c $(CFLAGS) -Wno-format-overflow $?
+plot2dNear2d0.o: plot2dNear2d0.c
+	$(CC) -c $(CFLAGS) -Wno-format-overflow $?
+plot3dNear2d0.o: plot3dNear2d0.c
+	$(CC) -c $(CFLAGS) -Wno-format-overflow $?
+#cputime.o: cputime.c
+#	$(CC) -c -O2 $?
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

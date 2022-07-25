@@ -1,0 +1,134 @@
+PROGRAM = ../ofd_cuda_mpi
+
+MPIOPT  = -D_MPI -I$(MPI_INCLUDE)
+
+OBJS    =           \
+Main.o              \
+memallocfree3_gpu.o \
+solve.o             \
+comm_cuda.o         \
+info_gpu_mpi.o      \
+rank2device.o       \
+../cuda/check_gpu.o         \
+../cuda/cuda_memory.o       \
+../cuda/setup_gpu.o         \
+../cuda/memallocfree2_gpu.o \
+../cuda/initfield.o         \
+../cuda/updateEx.o          \
+../cuda/updateEy.o          \
+../cuda/updateEz.o          \
+../cuda/updateHx.o          \
+../cuda/updateHy.o          \
+../cuda/updateHz.o          \
+../cuda/dispersionEx.o      \
+../cuda/dispersionEy.o      \
+../cuda/dispersionEz.o      \
+../cuda/murH.o              \
+../cuda/pmlEx.o             \
+../cuda/pmlEy.o             \
+../cuda/pmlEz.o             \
+../cuda/pmlHx.o             \
+../cuda/pmlHy.o             \
+../cuda/pmlHz.o             \
+../cuda/pbcx.o              \
+../cuda/pbcy.o              \
+../cuda/pbcz.o              \
+../cuda/efeed.o             \
+../cuda/eload.o             \
+../cuda/vpoint.o            \
+../cuda/dftNear1d.o         \
+../cuda/dftNear1dX.o        \
+../cuda/dftNear1dY.o        \
+../cuda/dftNear1dZ.o        \
+../cuda/dftNear2d.o         \
+../cuda/dftNear2dX.o        \
+../cuda/dftNear2dY.o        \
+../cuda/dftNear2dZ.o        \
+../cuda/dftNear3d.o         \
+../cuda/average.o           \
+../src/input.o             \
+../src/input2.o            \
+../src/monitor.o           \
+../src/memallocfree1.o     \
+../cuda/setup.o             \
+../cuda/setupId.o           \
+../src/setupDispersion.o   \
+../src/setupNear.o         \
+../src/setupMurHx.o        \
+../src/setupMurHy.o        \
+../src/setupMurHz.o        \
+../src/setupPmlEx.o        \
+../src/setupPmlEy.o        \
+../src/setupPmlEz.o        \
+../src/setupPmlHx.o        \
+../src/setupPmlHy.o        \
+../src/setupPmlHz.o        \
+../src/setupPml.o          \
+../src/calcNear3d.o        \
+../src/nearfield_c.o       \
+../src/vfeed.o             \
+../src/zfeed.o             \
+../src/spara.o             \
+../src/coupling.o          \
+../src/outputCross.o       \
+../src/plot3dGeom.o        \
+../src/ingeometry.o        \
+../src/geomlines.o         \
+../src/writeout.o          \
+../src/readout.o           \
+../src/post.o              \
+../src/farfield.o          \
+../src/planewave.o         \
+../src/outputFar0d.o       \
+../src/outputFar1d.o       \
+../src/outputFar2d.o       \
+../src/outputNear1d.o      \
+../src/outputNear2d.o      \
+../cuda/calcFar1d.o         \
+../cuda/calcFar2d.o         \
+../src/calcNear1d.o        \
+../src/calcNear2d.o        \
+../src/plot2dIter.o        \
+../src/plot2dFeed.o        \
+../src/plot2dPoint.o       \
+../src/plot2dFreq.o        \
+../src/plot2dFreq0.o       \
+../src/plot2dFar0d0.o      \
+../src/plot2dFar1d0.o      \
+../src/plot3dFar2d.o       \
+../src/plot3dFar2d0.o      \
+../src/plot2dNear1d0.o     \
+../src/plot2dNear2d0.o     \
+../src/plot3dNear2d0.o     \
+../src/utils.o             \
+../src/ev2dlib.o           \
+../src/ev2d.o              \
+../src/ev3d.o              \
+../mpi/setupSize.o         \
+../mpi/setupSizeNear.o     \
+../mpi/comm.o
+
+CC      = nvcc
+CFLAGS  = -O2 -I../include
+#CFLAGS  += -D_VECTOR
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+LDFLAGS = -O2 -L$(MPI_LIB)
+LIBS    = -lmpi
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) -o $(PROGRAM) $(LDFLAGS) $(OBJS) $(LIBS)
+
+.SUFFIXES: .cu
+
+solve.o: solve.cu
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+comm_cuda.o: comm_cuda.cu
+	$(CC) -c $(CFLAGS) $(MPIOPT) $?
+
+.cu.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o

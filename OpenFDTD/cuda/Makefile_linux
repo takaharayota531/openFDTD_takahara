@@ -1,0 +1,135 @@
+PROGRAM = ../ofd_cuda
+
+OBJS    =           \
+Main.o              \
+info_gpu.o          \
+check_gpu.o         \
+cuda_memory.o       \
+setup_gpu.o         \
+memallocfree2_gpu.o \
+memallocfree3_gpu.o \
+solve.o             \
+initfield.o         \
+updateEx.o          \
+updateEy.o          \
+updateEz.o          \
+updateHx.o          \
+updateHy.o          \
+updateHz.o          \
+dispersionEx.o      \
+dispersionEy.o      \
+dispersionEz.o      \
+efeed.o             \
+eload.o             \
+vpoint.o            \
+murH.o              \
+pmlEx.o             \
+pmlEy.o             \
+pmlEz.o             \
+pmlHx.o             \
+pmlHy.o             \
+pmlHz.o             \
+pbcx.o              \
+pbcy.o              \
+pbcz.o              \
+dftNear1d.o         \
+dftNear1dX.o        \
+dftNear1dY.o        \
+dftNear1dZ.o        \
+dftNear2d.o         \
+dftNear2dX.o        \
+dftNear2dY.o        \
+dftNear2dZ.o        \
+dftNear3d.o         \
+average.o           \
+../src/input.o             \
+../src/input2.o            \
+../src/monitor.o           \
+../src/memallocfree1.o     \
+setup.o             \
+../src/setupSize.o         \
+../src/setupSizeNear.o     \
+setupId.o           \
+../src/setupDispersion.o   \
+../src/setupNear.o         \
+../src/setupMurHx.o        \
+../src/setupMurHy.o        \
+../src/setupMurHz.o        \
+../src/setupPmlEx.o        \
+../src/setupPmlEy.o        \
+../src/setupPmlEz.o        \
+../src/setupPmlHx.o        \
+../src/setupPmlHy.o        \
+../src/setupPmlHz.o        \
+../src/setupPml.o          \
+../src/vfeed.o             \
+../src/calcNear3d.o        \
+../src/nearfield_c.o       \
+../src/zfeed.o             \
+../src/spara.o             \
+../src/coupling.o          \
+../src/outputCross.o       \
+../src/plot3dGeom.o        \
+../src/ingeometry.o        \
+../src/geomlines.o         \
+../src/writeout.o          \
+../src/readout.o           \
+../src/post.o              \
+../src/farfield.o          \
+../src/planewave.o         \
+../src/outputFar0d.o       \
+../src/outputFar1d.o       \
+../src/outputFar2d.o       \
+../src/outputNear1d.o      \
+../src/outputNear2d.o      \
+calcFar1d.o         \
+calcFar2d.o         \
+../src/calcNear1d.o        \
+../src/calcNear2d.o        \
+../src/plot2dIter.o        \
+../src/plot2dFeed.o        \
+../src/plot2dPoint.o       \
+../src/plot2dFreq.o        \
+../src/plot2dFreq0.o       \
+../src/plot2dFar0d0.o      \
+../src/plot2dFar1d0.o      \
+../src/plot3dFar2d.o       \
+../src/plot3dFar2d0.o      \
+../src/plot2dNear1d0.o     \
+../src/plot2dNear2d0.o     \
+../src/plot3dNear2d0.o     \
+../src/utils.o             \
+../src/cputime.o           \
+../src/ev2dlib.o           \
+../src/ev2d.o              \
+../src/ev3d.o
+
+CC      = nvcc
+CFLAGS  = -O2 -I../include
+#CFLAGS  += -D_VECTOR
+#CFLAGS  += -D_DOUBLE
+#CFLAGS  += -D_ID32
+CCOPT   = -Xcompiler "-std=c99"
+LDFLAGS = -O2
+LIBS    =
+
+$(PROGRAM): $(OBJS)
+	@echo "Loading $(PROGRAM) ... "
+	@$(CC) -o $(PROGRAM) $(LDFLAGS) $(OBJS) $(LIBS)
+
+.SUFFIXES: .cu
+
+setup.o: ../src/setup.c
+	$(CC) -c $(CFLAGS) $(CCOPT) $?
+setupId.o: ../src/setupId.c
+	$(CC) -c $(CFLAGS) $(CCOPT) $?
+calcFar1d.o: ../src/calcFar1d.c
+	$(CC) -c $(CFLAGS) $(CCOPT) $?
+calcFar2d.o: ../src/calcFar2d.c
+	$(CC) -c $(CFLAGS) $(CCOPT) $?
+
+.cu.o:
+	$(CC) -c $(CFLAGS) $<
+
+clean:
+	rm -f *.o
