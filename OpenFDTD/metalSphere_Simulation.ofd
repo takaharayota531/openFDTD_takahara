@@ -1,0 +1,31 @@
+OpenFDTD 2 7
+title = 導体球のシミュレーション07/26
+xmesh = -0.15 300 0.15
+ymesh = -0.15 300 0.15
+zmesh = 0 650 0.65
+material = 1 3.0 5e-3 1 0 土壌
+geometry = 2 1 -0.15 0.15 -0.15 0.15 0 0.45
+name = 土壌
+geometry = 1 2 -0.025 0.025 0.025 0.075 0.38 0.43
+planewave = 0 0 1
+frequency1 = 1e9 11e9 200
+frequency2 = 1e9 11e9 10
+solver = 3000 50 1e-3
+plotiter = 1
+plotfeed = 1
+plotzin = 1
+plotref = 1
+plotspara = 1
+plotfar2d = 18 36
+far2dcomponent = 1 0 0 0 0 0 0
+far2ddb = 1
+far2dobj = 0.5
+plotnear2d = E X 0
+near2ddim = 1 1
+near2ddb = 0
+near2dcontour = 0
+near2dobj = 1
+near2dnoinc = 0
+window2d = 750 500 15 0
+window3d = 600 600 15 60 30
+end

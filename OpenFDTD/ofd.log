@@ -1,0 +1,49 @@
+<<< OpenFDTD (CPU+OpenMP) Ver.2.7.5 >>>
+Thread = 8, Process = 1
+Sat Sep 10 13:21:25 2022
+Title = 
+Source = plane wave
+Cells = 60 x 60 x 60 = 216000
+No. of Materials  = 4
+No. of Geometries = 2
+No. of Points     = 0
+No. of Freq.s (1) = 41
+No. of Freq.s (2) = 1
+CPU Memory size   = 19 [MB]
+Output filesize   = 11 [MB]
+ABC = Mur-1st
+Dt[sec] = 3.8517e-12, Tw[sec] = 6.3500e-10, Tw/Dt = 164.864
+Iterations = 3000, Convergence = 1.000e-03
+=== iteration start ===
+   step   <E>      <H>
+      0 0.000000 0.000000
+    100 0.064088 0.047746
+    200 0.198178 0.220977
+    300 0.141857 0.169861
+    400 0.079838 0.082584
+    500 0.034893 0.040228
+    600 0.018170 0.023408
+    700 0.009486 0.011485
+    800 0.005357 0.006215
+    900 0.003261 0.003850
+   1000 0.002370 0.002426
+   1100 0.001220 0.001565
+   1200 0.000927 0.001066
+   1300 0.000544 0.000523
+   1400 0.000362 0.000437
+   1500 0.000229 0.000320
+   1600 0.000161 0.000237
+   1700 0.000148 0.000188
+    --- converged ---
+=== cross section ===
+  frequency[Hz] backward[m*m]  forward[m*m]
+    2.45000e+09    1.8322e-02    5.2466e-02
+=== output files ===
+ofd.log, geom3d.htm, ofd.out
+=== cpu time [sec] ===
+  part-1 :       4.771
+  part-2 :       0.052
+  --------------------
+  total  :       4.823
+=== normal end ===
+Sat Sep 10 13:21:30 2022

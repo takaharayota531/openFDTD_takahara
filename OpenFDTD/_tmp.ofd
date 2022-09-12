@@ -1,0 +1,29 @@
+OpenFDTD 2 7
+xmesh = -0.06 60 0.06
+ymesh = -0.06 60 0.06
+zmesh = -0.06 60 0.06
+material = 1 4 0 1 0 dry_sand
+material = 1 10000000 17.5 1 0 metal_sphere
+geometry = 2 1 -0.03 0.03 -0.03 0.03 -0.03 0.03
+geometry = 3 2 -0.01 0.01 -0.01 0.01 -0.01 0.01
+planewave = 0 0 1
+frequency1 = 1e9 3e9 40
+frequency2 = 2.45e9 2.45e9 0
+solver = 3000 100 1e-3
+plotiter = 1
+plotfeed = 1
+plotzin = 1
+plotspara = 1
+plotfar2d = 18 36
+far2dcomponent = 1 0 0 0 0 0 0
+far2ddb = 1
+far2dobj = 0.5
+plotnear2d = E X 0
+near2ddim = 1 1
+near2ddb = 0
+near2dcontour = 0
+near2dobj = 1
+near2dnoinc = 0
+window2d = 750 500 15 0
+window3d = 600 600 15 60 30
+end
