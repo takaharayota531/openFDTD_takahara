@@ -1,0 +1,28 @@
+OpenFDTD 2 7
+title = モノタロウ_パイプ
+xmesh = -0.15 30 0.15
+ymesh = -0.15 30 0.15
+zmesh = 0 30 0.3
+material = 1 10 0.01 1 0 土
+geometry = 0 1 -0.15 0.15 -0.15 0.15 0 0.3
+name = air
+geometry = 2 1 -0.15 0.15 -0.15 0.15 0 0.28
+geometry = 0 12 0.086 0.114 -0.1 0.15 0.232 0.26
+name = metal_pipe
+planewave = 0 0 1
+frequency1 = 1e9 11e9 10
+frequency2 = 1e9 11e9 10
+solver = 3000 50 1e-3
+plotnear1d = E X 0 0
+near1ddb = 0
+near1dnoinc = 0
+plotnear2d = E X 0.1
+plotnear2d = E Z 0.25
+near2ddim = 1 1
+near2ddb = 0
+near2dcontour = 0
+near2dobj = 1
+near2dnoinc = 0
+window2d = 750 500 15 0
+window3d = 600 600 15 60 30
+end
